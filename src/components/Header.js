@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import todoList from "../database";
 import background from '../images/background.jpg'
 import sun from '../images/sun.svg'
+import TodoList from '../components/TodoList';
+
 
 
 function Header() {
-    
+   
     function handleAddItem(e) {
         e.preventDefault();
         const newInput = document.querySelector('input');
         const value = newInput.value;
-        console.log(value)
-        todoList.push({"text": value, "isActive": true})
+        todoList.push({"text": value, "isComplete": false})
         newInput.value = "";
-        console.log(todoList)
     }
 
     return (
@@ -31,6 +31,8 @@ function Header() {
                     <InputStyled type="text" placeholder="Create a new todo..."/>
                 </form>
             </InputContainerStyled>
+
+            <TodoList todo={todoList} />
 
         </ContainerStyled>
     )

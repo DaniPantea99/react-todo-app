@@ -1,0 +1,15 @@
+// const todoList = [
+{
+    "data": [
+        {
+            "text": "1111",
+            "isComplete": false
+        }
+    ]
+    
+}
+
+// const allTodosAddress = todoList
+
+// export default allTodosAddress
+// export default todoList

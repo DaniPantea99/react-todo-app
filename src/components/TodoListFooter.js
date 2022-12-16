@@ -4,7 +4,7 @@ import styled from "styled-components";
 function TodoListFooter() {
     return (
         <FooterStyled>
-            <p>5 Items Left</p>
+            <p>0 Items Left</p>
             
             <FiltersStyled>
                 <p>All</p>
