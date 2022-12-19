@@ -1,21 +1,33 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useDispatch } from "react-redux";
 import styled from 'styled-components';
-import todoList from "../database";
+// import todoList from "../database";
 import background from '../images/background.jpg'
 import sun from '../images/sun.svg'
 import TodoList from '../components/TodoList';
+import axios from "axios";
+import urlurl from '../api.js'
+import { createTodo } from "../actions/todoAction";
 
 
 
-function Header() {
+function Header({all}) {
    
+    const dispatch = useDispatch()
+    // useEffect(() => {
+    //     dispatch(createTodo())
+    // }, [dispatch])
+
     function handleAddItem(e) {
         e.preventDefault();
         const newInput = document.querySelector('input');
         const value = newInput.value;
-        todoList.push({"text": value, "isComplete": false})
+        const item = ({"text": value, "isComplete": false})
+        dispatch(createTodo(item))
+        console.log(all)
         newInput.value = "";
     }
+
 
     return (
         <ContainerStyled>
@@ -32,7 +44,7 @@ function Header() {
                 </form>
             </InputContainerStyled>
 
-            <TodoList todo={todoList} />
+            {/* <TodoList todo={todoList} /> */}
 
         </ContainerStyled>
     )

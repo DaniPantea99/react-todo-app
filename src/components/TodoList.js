@@ -5,7 +5,7 @@ import TodoListFooter from './TodoListFooter'
 // import todoList from "../database";
 
 
-function TodoList({todo}) {
+function TodoList({all}) {
 
     
     // const [a, setA] = useState()
@@ -17,7 +17,7 @@ function TodoList({todo}) {
 
     return (
         <ListContainer>
-            {todo.map((item, index) => <TodoItem key={index} inputText={item.text} />)}
+            {all.map((item, index) => <TodoItem key={index} inputText={item.text} />)}
             {/* {a} */}
             <TodoListFooter />
         </ListContainer>

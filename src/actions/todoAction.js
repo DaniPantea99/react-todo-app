@@ -1,8 +1,8 @@
 import axios from "axios";
-import {allTodosAddress} from '../database'
+import urlurl from '../api.js'
 
 const loadTodo = () => async (dispatch) => {
-    const allTodos = await axios.get(allTodosAddress);
+    const allTodos = await axios.get(urlurl);
 
     // const active = allTodos.filter(item)
     // const completed = allTodos.filter(item)
@@ -17,4 +17,15 @@ const loadTodo = () => async (dispatch) => {
     })
 }
 
-export default loadTodo
+const createTodo = (item) => async (dispatch) => {
+    const createdItem = await axios.post(urlurl, item);
+
+    dispatch({
+        type: "CREATE_TODO",
+        payload: {
+            item: createdItem.data,
+        }
+    })
+}
+
+export {loadTodo, createTodo}

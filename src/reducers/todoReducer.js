@@ -13,6 +13,11 @@ const todoReducer = (state=initState, action) => {
                 active: action.payload.active,
                 completed: action.payload.completed,
             };
+        case "CREATE_TODO":
+            return {
+                ...state,
+                all: [...state.all, action.payload.item]
+            }
         default:
             return {...state};
     }
