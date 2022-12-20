@@ -28,4 +28,15 @@ const createTodo = (item) => async (dispatch) => {
     })
 }
 
+// const removeTodos = (items) => async (dispatch) => {
+//     const removeItems = items.filter(item => item.id === "1")
+
+//     dispatch({
+//         type: "REMOVE_TODO",
+//         payload: {
+//             item: removeItems.data,
+//         }
+//     })
+// }
+
 export {loadTodo, createTodo}

@@ -15,9 +15,13 @@ const todoReducer = (state=initState, action) => {
             };
         case "CREATE_TODO":
             return {
-                ...state,
                 all: [...state.all, action.payload.item]
             }
+        // case "REMOVE_TODO":
+        //     return {
+            
+        //         items: action.payload.item
+        //     }
         default:
             return {...state};
     }

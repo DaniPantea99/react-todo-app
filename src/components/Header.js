@@ -1,33 +1,21 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import styled from 'styled-components';
-// import todoList from "../database";
 import background from '../images/background.jpg'
 import sun from '../images/sun.svg'
-import TodoList from '../components/TodoList';
-import axios from "axios";
-import urlurl from '../api.js'
 import { createTodo } from "../actions/todoAction";
 
-
-
-function Header({all}) {
+function Header() {
    
     const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(createTodo())
-    // }, [dispatch])
 
     function handleAddItem(e) {
         e.preventDefault();
-        const newInput = document.querySelector('input');
-        const value = newInput.value;
-        const item = ({"text": value, "isComplete": false})
+        const inputValue = document.querySelector('input').value;
+        const item = ({"text": inputValue, "isComplete": false})
         dispatch(createTodo(item))
-        console.log(all)
-        newInput.value = "";
+        document.querySelector('input').value = "";
     }
-
 
     return (
         <ContainerStyled>
@@ -43,9 +31,6 @@ function Header({all}) {
                     <InputStyled type="text" placeholder="Create a new todo..."/>
                 </form>
             </InputContainerStyled>
-
-            {/* <TodoList todo={todoList} /> */}
-
         </ContainerStyled>
     )
 }
@@ -53,7 +38,6 @@ function Header({all}) {
 const ContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
-    /* position: relative; */
     background-image: url(${background});
     background-size: cover;
     padding: 5rem 0.75rem;

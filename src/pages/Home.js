@@ -13,22 +13,13 @@ function Home() {
 
     const {all, active, completed} = useSelector((state) => state.todos)
 
-    // console.log(all)
-
     return (
         <div>
-            <Header all={all} />
+            <Header />
             <TodoList all={all}/>
-            {/* {all.map((item) =>
-                <div key={item.text}>
-                    <p>{item.text}</p>
-                </div>
-                
-            )} */}
+
         </div>
     )
 }
-
-
 
 export default Home

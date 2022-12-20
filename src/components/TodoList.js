@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import TodoItem from './TodoItem'
 import TodoListFooter from './TodoListFooter'
-// import todoList from "../database";
 
 
 function TodoList({all}) {
 
-    
-    // const [a, setA] = useState()
-
-    // useEffect(() => {
-    //     setA(todo.map((item, index) => <TodoItem key={index} inputText={item.text} />))
-    // }, [])
-     
-
     return (
         <ListContainer>
-            {all.map((item, index) => <TodoItem key={index} inputText={item.text} />)}
-            {/* {a} */}
-            <TodoListFooter />
+            {all.map((item, index) => <TodoItem key={index} input={item} />)}
+            {all.length !== 0 &&
+            <TodoListFooter all={all} />
+            }
         </ListContainer>
     )
 }
