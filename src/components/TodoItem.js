@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import checked from '../images/check.svg'
 import urlurl from "../api";
@@ -8,15 +8,16 @@ function TodoItem({input}) {
 
     const [active, setActive] = useState(false)
 
-    function handleItem() {
-        if(active !== true) {
-            setActive(true)
-            axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": true, "id": `${input.id}`})
-        } else {
-            setActive(false)
-            axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": false, "id": `${input.id}`})
+        function handleItem() {
+            if(active !== true) {
+                setActive(true)
+                axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": true, "id": `${input.id}`})
+            } else {
+                setActive(false)
+                axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": false, "id": `${input.id}`})
+            }
         }
-    }
+
 
     return (
         <ItemStyled onClick={handleItem}>

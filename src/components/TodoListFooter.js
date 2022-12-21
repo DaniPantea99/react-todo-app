@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import { useDispatch } from "react-redux";
 // import {removeTodos} from '../actions/todoAction'
 
-function TodoListFooter({all}) {
+function TodoListFooter({all, active, completed, showActive}) {
 
     const counter = all.length
 
@@ -12,6 +12,12 @@ function TodoListFooter({all}) {
     // function handleClear() {
     //     dispatch(removeTodos(all))
     //     console.log(all)
+    // }
+
+    // function handleShowActive() {
+    //     const a = document.querySelector('.todocontainer')
+    //     console.log(a)
+    //     a.append(showActive)
     // }
 
     return (

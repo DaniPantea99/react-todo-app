@@ -12,8 +12,13 @@
     },
     {
       "text": "trei",
-      "isComplete": false,
+      "isComplete": true,
       "id": 3
+    },
+    {
+      "text": "patru",
+      "isComplete": true,
+      "id": 4
     }
   ]
 }

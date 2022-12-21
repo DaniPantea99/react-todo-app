@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import {useDispatch, useSelector} from 'react-redux';
 import {loadTodo} from '../actions/todoAction'
 import TodoList from '../components/TodoList';
+import styled from 'styled-components';
 
 function Home() {
 
@@ -16,8 +17,7 @@ function Home() {
     return (
         <div>
             <Header />
-            <TodoList all={all}/>
-
+            <TodoList all={all} active={active} completed={completed}/>
         </div>
     )
 }

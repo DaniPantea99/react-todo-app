@@ -4,13 +4,38 @@ import TodoItem from './TodoItem'
 import TodoListFooter from './TodoListFooter'
 
 
-function TodoList({all}) {
+
+function TodoList({all, active, completed}) {
+
+    function showAll() {
+        return (
+            all.map((item, index) => <TodoItem key={index} input={item} />)
+        )
+    }
+
+    function showActive() {
+        return (
+            active.map((item, index) => <TodoItem key={index} input={item} />)
+
+        )
+    }
+
+    function showCompleted() {
+        return (
+            completed.map((item, index) => <TodoItem key={index} input={item} />)
+        )
+    }
 
     return (
         <ListContainer>
-            {all.map((item, index) => <TodoItem key={index} input={item} />)}
+            <TodosContainer className="todocontainer">
+                {showAll()}
+                {/* {showActive()} */}
+                {/* {showCompleted()} */}
+
+            </TodosContainer>
             {all.length !== 0 &&
-            <TodoListFooter all={all} />
+                <TodoListFooter all={all} active={active} completed={completed} showActive={showActive()}/>
             }
         </ListContainer>
     )
@@ -26,6 +51,14 @@ const ListContainer = styled.div`
     overflow: hidden;
     width: 450px;
     margin: 0 auto;
-
 `
+
+const TodosContainer = styled.div`
+    max-height: 50vh;
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`
+
 export default TodoList
