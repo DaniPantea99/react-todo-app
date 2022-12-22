@@ -2,22 +2,22 @@
   "data": [
     {
       "text": "unu",
-      "isComplete": false,
+      "state": "active",
       "id": 1
     },
     {
       "text": "doi",
-      "isComplete": false,
+      "state": "active",
       "id": 2
     },
     {
       "text": "trei",
-      "isComplete": true,
+      "state": "done",
       "id": 3
     },
     {
       "text": "patru",
-      "isComplete": true,
+      "state": "done",
       "id": 4
     }
   ]

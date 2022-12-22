@@ -3,15 +3,21 @@ import urlurl from '../api.js'
 
 const loadTodo = () => async (dispatch) => {
     const allTodos = await axios.get(urlurl);
-    const activeTodos = allTodos.data.filter(item => item.isComplete === false)
-    const completedTodos = allTodos.data.filter(item => item.isComplete === true)
 
     dispatch({
         type: "FETCH_TODO",
         payload: {
             all: allTodos.data,
-            active: activeTodos,
-            completed: completedTodos,
+        }
+    })
+}
+
+const loadFilterTodo = (state) => async (dispatch) => {
+
+    dispatch({
+        type: "FILTER_TODO",
+        payload: {
+            state
         }
     })
 }
@@ -23,6 +29,12 @@ const createTodo = (item) => async (dispatch) => {
         type: "CREATE_TODO",
         payload: {
             item: createdItem.data,
+        }
+    })
+    dispatch({
+        type: "FILTER_TODO",
+        payload: {
+            state: ""
         }
     })
 }
@@ -38,4 +50,4 @@ const createTodo = (item) => async (dispatch) => {
 //     })
 // }
 
-export {loadTodo, createTodo}
+export {loadTodo, createTodo, loadFilterTodo}

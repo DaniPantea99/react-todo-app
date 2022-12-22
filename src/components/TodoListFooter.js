@@ -1,33 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import { useDispatch } from "react-redux";
-// import {removeTodos} from '../actions/todoAction'
+import { useDispatch } from "react-redux";
+import {loadFilterTodo} from '../actions/todoAction'
+import {useSelector} from 'react-redux';
 
-function TodoListFooter({all, active, completed, showActive}) {
 
-    const counter = all.length
+function TodoListFooter() {
 
-    // const dispatch = useDispatch()
+    const {filtered} = useSelector((state) => state.todos)
 
-    // function handleClear() {
-    //     dispatch(removeTodos(all))
-    //     console.log(all)
-    // }
+    const dispatch = useDispatch()
 
-    // function handleShowActive() {
-    //     const a = document.querySelector('.todocontainer')
-    //     console.log(a)
-    //     a.append(showActive)
-    // }
+    function handleFilter(state) {
+        dispatch(loadFilterTodo(state))
+    }
+
+  
+
 
     return (
         <FooterStyled>
-            <p>{counter} Items Left</p>
+            <p>0 Items Left</p>
             
             <FiltersStyled>
-                <BtnFilterStyled>All</BtnFilterStyled>
-                <BtnFilterStyled>Active</BtnFilterStyled>
-                <BtnFilterStyled>Completed</BtnFilterStyled>
+                <BtnFilterStyled onClick={() => handleFilter()}>All</BtnFilterStyled>
+                <BtnFilterStyled onClick={() => handleFilter("active")}>Active</BtnFilterStyled>
+                <BtnFilterStyled onClick={() => handleFilter("done")}>Completed</BtnFilterStyled>
             </FiltersStyled>
 
             <BtnStyled>Clear Completed</BtnStyled>

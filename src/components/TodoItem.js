@@ -1,29 +1,38 @@
-import React, {useEffect, useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import checked from '../images/check.svg'
 import urlurl from "../api";
 import axios from "axios";
+import {useSelector} from 'react-redux';
 
-function TodoItem({input}) {
 
-    const [active, setActive] = useState(false)
+function TodoItem({item}) {
+    const {filtered} = useSelector((state) => state.todos)
 
+    const [state, setState] = useState(item.state)
         function handleItem() {
-            if(active !== true) {
-                setActive(true)
-                axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": true, "id": `${input.id}`})
+            if(state === "active") {
+                setState("done")
+                axios.put(`${urlurl}/${item.id}`, {"text": `${item.text}`, "state": "done", "id": `${item.id}`})
             } else {
-                setActive(false)
-                axios.put(`${urlurl}/${input.id}`, {"text": `${input.text}`, "isComplete": false, "id": `${input.id}`})
+                setState("active")
+                axios.put(`${urlurl}/${item.id}`, {"text": `${item.text}`, "state": "active", "id": `${item.id}`})
             }
         }
 
+        // const counterActiveTodos = filtered.filter((item) => item.state === "active").length
+        // const [counter, setCounter] = useState(counterActiveTodos)
+    
+        // useEffect(() => {
+        //     console.log("use effect has run")
+        //     setCounter(counterActiveTodos)
+        // }, [state])
 
     return (
         <ItemStyled onClick={handleItem}>
-            <InputStyled className="checkbox" type="checkbox" value={active} />
-            <TextStyled value={active}>
-                {input.text}
+            <InputStyled className="checkbox" type="checkbox" value={state} />
+            <TextStyled value={state}>
+                {item.text}
             </TextStyled>
         </ItemStyled>
     )
@@ -59,7 +68,7 @@ const InputStyled = styled.input`
 
     } 
     
-    &[value="true"] {
+    &[value="done"] {
         border: none;
         background: url(${checked}) 0px center no-repeat;
     }
@@ -72,7 +81,7 @@ const TextStyled = styled.span`
     width: 100%;
     font-size: 1rem;
     text-transform: capitalize;
-    &[value="true"] {
+    &[value="done"] {
         color: #68697f;
         text-decoration: line-through;
     }

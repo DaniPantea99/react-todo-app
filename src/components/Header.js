@@ -12,7 +12,7 @@ function Header() {
     function handleAddItem(e) {
         e.preventDefault();
         const inputValue = document.querySelector('input').value;
-        const item = ({"text": inputValue, "isComplete": false})
+        const item = ({"text": inputValue, "state": "active"})
         dispatch(createTodo(item))
         document.querySelector('input').value = "";
     }

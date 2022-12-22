@@ -2,40 +2,20 @@ import React from "react";
 import styled from "styled-components";
 import TodoItem from './TodoItem'
 import TodoListFooter from './TodoListFooter'
+import {useSelector} from 'react-redux';
 
 
+function TodoList() {
 
-function TodoList({all, active, completed}) {
-
-    function showAll() {
-        return (
-            all.map((item, index) => <TodoItem key={index} input={item} />)
-        )
-    }
-
-    function showActive() {
-        return (
-            active.map((item, index) => <TodoItem key={index} input={item} />)
-
-        )
-    }
-
-    function showCompleted() {
-        return (
-            completed.map((item, index) => <TodoItem key={index} input={item} />)
-        )
-    }
+    const {all, filtered} = useSelector((state) => state.todos)
 
     return (
         <ListContainer>
-            <TodosContainer className="todocontainer">
-                {showAll()}
-                {/* {showActive()} */}
-                {/* {showCompleted()} */}
-
+            <TodosContainer>
+                {filtered.map((item, index) => <TodoItem key={index} item={item} />)}
             </TodosContainer>
             {all.length !== 0 &&
-                <TodoListFooter all={all} active={active} completed={completed} showActive={showActive()}/>
+                <TodoListFooter />
             }
         </ListContainer>
     )
