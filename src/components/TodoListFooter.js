@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 
 function TodoListFooter() {
 
-    const {filtered} = useSelector((state) => state.todos)
+    const {all} = useSelector((state) => state.todos)
 
     const dispatch = useDispatch()
 
@@ -16,11 +16,9 @@ function TodoListFooter() {
     }
 
   
-
-
     return (
         <FooterStyled>
-            <p>0 Items Left</p>
+            <p>{all.filter(item => item.state === "active").length} Active Items Left</p>
             
             <FiltersStyled>
                 <BtnFilterStyled onClick={() => handleFilter()}>All</BtnFilterStyled>

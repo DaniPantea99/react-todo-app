@@ -12,6 +12,22 @@ const loadTodo = () => async (dispatch) => {
     })
 }
 
+const updateItem = (item) => async (dispatch) => {
+    const updatedItem = await axios.put(`${urlurl}/${item.id}`, item)
+    dispatch({
+        type: "UPDATE_TODO_ITEM",
+        payload: {
+            item: updatedItem.data
+        }
+    })
+    dispatch({
+        type: "FILTER_TODO",
+        payload: {
+            state: ""
+        }
+    })
+}
+
 const loadFilterTodo = (state) => async (dispatch) => {
 
     dispatch({
@@ -39,15 +55,23 @@ const createTodo = (item) => async (dispatch) => {
     })
 }
 
-// const removeTodos = (items) => async (dispatch) => {
-//     const removeItems = items.filter(item => item.id === "1")
+const removeTodoItem = (item) => async (dispatch) => {
+    const all = await axios.get(urlurl);
+    const index = all.data.indexOf(item)
+    const removeItem = all.data.splice(index, 1)
+    // console.log(removeItem)
+    dispatch({
+        type: "REMOVE_ITEM",
+        payload: {
+            item: removeItem,
+        }
+    })
+    dispatch({
+        type: "FILTER_TODO",
+        payload: {
+            state: ""
+        }
+    })
+}
 
-//     dispatch({
-//         type: "REMOVE_TODO",
-//         payload: {
-//             item: removeItems.data,
-//         }
-//     })
-// }
-
-export {loadTodo, createTodo, loadFilterTodo}
+export {loadTodo, createTodo, loadFilterTodo, updateItem, removeTodoItem}

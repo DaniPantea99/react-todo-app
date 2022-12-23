@@ -1,52 +1,56 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import styled from "styled-components";
 import checked from '../images/check.svg'
-import urlurl from "../api";
-import axios from "axios";
-import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {updateItem, removeTodoItem} from '../actions/todoAction'
+
 
 
 function TodoItem({item}) {
-    const {filtered} = useSelector((state) => state.todos)
 
-    const [state, setState] = useState(item.state)
-        function handleItem() {
+    const dispatch = useDispatch();
+
+        function toggleState() {
+            const {state} = item
             if(state === "active") {
-                setState("done")
-                axios.put(`${urlurl}/${item.id}`, {"text": `${item.text}`, "state": "done", "id": `${item.id}`})
+                dispatch(updateItem({...item, state: "done"}))
             } else {
-                setState("active")
-                axios.put(`${urlurl}/${item.id}`, {"text": `${item.text}`, "state": "active", "id": `${item.id}`})
+                dispatch(updateItem({...item, state: "active"}))
             }
         }
 
-        // const counterActiveTodos = filtered.filter((item) => item.state === "active").length
-        // const [counter, setCounter] = useState(counterActiveTodos)
-    
-        // useEffect(() => {
-        //     console.log("use effect has run")
-        //     setCounter(counterActiveTodos)
-        // }, [state])
-
+        function handleRemoveItem(e) {
+            // e.preventDefault()
+            e.stopPropagation()
+            dispatch(removeTodoItem({...item, item}))
+            console.log(item)
+        }
+            
     return (
-        <ItemStyled onClick={handleItem}>
-            <InputStyled className="checkbox" type="checkbox" value={state} />
-            <TextStyled value={state}>
+        <ItemStyled onClick={toggleState}>
+            <InputStyled className="checkbox" type="checkbox" value={item.state} />
+            <TextStyled value={item.state}>
                 {item.text}
             </TextStyled>
+            {item.state === "done" &&
+            <BtnStyled onClick={handleRemoveItem}>X</BtnStyled>
+            }
         </ItemStyled>
     )
 }
 
 const ItemStyled = styled.div`
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content:left;
     align-items: center;
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
     background: #26273c;
     border-bottom: 1px solid #38394e;
     width: 100%;
     cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
     &:hover {
         filter: brightness(110%)
     }
@@ -57,17 +61,16 @@ const InputStyled = styled.input`
     cursor: pointer;
     appearance: none;
     width: 24px;
-    height: 24px;
+    height: 22px;
     border-radius: 50%;
     border: 1px solid #40425a;
     margin-right: 0.5rem;
-
+    transition: all 0.3s ease;
     &:hover {
         background: #40425a;
         border: 1px solid #8187bc;
 
     } 
-    
     &[value="done"] {
         border: none;
         background: url(${checked}) 0px center no-repeat;
@@ -78,12 +81,35 @@ const TextStyled = styled.span`
     pointer-events: none;
     padding: 1rem;
     color: #c2c3dc;
-    width: 100%;
+    width: 80%;
     font-size: 1rem;
     text-transform: capitalize;
     &[value="done"] {
         color: #68697f;
         text-decoration: line-through;
+    }
+`
+
+const BtnStyled = styled.button`
+    
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 0px 1px 0px gray;
+    border-radius: 10px;
+    background: inherit;
+    color: white;
+    padding: 0.75rem 0.75rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    z-index: 2;
+    font-size: 1rem;
+    &:hover {
+        color: red;
+        background: #f9caca;
     }
 `
 

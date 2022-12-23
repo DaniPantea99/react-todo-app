@@ -2,12 +2,12 @@
   "data": [
     {
       "text": "unu",
-      "state": "active",
+      "state": "done",
       "id": 1
     },
     {
       "text": "doi",
-      "state": "active",
+      "state": "done",
       "id": 2
     },
     {
@@ -17,8 +17,23 @@
     },
     {
       "text": "patru",
-      "state": "done",
+      "state": "active",
       "id": 4
+    },
+    {
+      "text": "cinci",
+      "state": "active",
+      "id": 5
+    },
+    {
+      "text": "sase",
+      "state": "done",
+      "id": 6
+    },
+    {
+      "text": "Pass the value of the element you wish to remove from your array into the indexOf() method to return the index of the element that matches that value in the array. Then make use of the splice() method to remove the element at the returned index.",
+      "state": "done",
+      "id": 7
     }
   ]
 }

@@ -25,11 +25,22 @@ const todoReducer = (state = initState, action) => {
           ),
         ],
       };
-    // case "REMOVE_TODO":
-    //     return {
-
-    //         items: action.payload.item
-    //     }
+    case "UPDATE_TODO_ITEM":
+        const {item} = action.payload
+        const index = state.all.findIndex(f => f.id === item.id)
+        const todoList = state.all.slice()
+        if(index > -1) {
+            todoList[index] = item
+        }
+        return {
+            ...state,
+            all: todoList
+        }
+    case "REMOVE_ITEM":
+        return {
+            ...state,
+            all: [...state.all, action.payload.item],
+        }
     default:
       return { ...state };
   }
