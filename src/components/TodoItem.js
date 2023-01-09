@@ -81,7 +81,9 @@ const TextStyled = styled.span`
     color: #c2c3dc;
     width: 80%;
     font-size: 1rem;
-    text-transform: capitalize;
+    &::first-letter {
+        text-transform: capitalize;
+    }
     &[value="done"] {
         color: #68697f;
         text-decoration: line-through;
