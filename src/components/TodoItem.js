@@ -22,7 +22,6 @@ function TodoItem({item}) {
         function handleRemoveItem(e) {
             e.stopPropagation()
             dispatch(removeTodoItem(item))
-            console.log("from TodoItem:", item)
         }
             
     return (
