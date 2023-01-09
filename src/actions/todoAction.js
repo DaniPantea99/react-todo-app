@@ -3,7 +3,6 @@ import urlurl from '../api.js'
 
 const loadTodo = () => async (dispatch) => {
     const allTodos = await axios.get(urlurl);
-
     dispatch({
         type: "FETCH_TODO",
         payload: {
@@ -29,7 +28,6 @@ const updateItem = (item) => async (dispatch) => {
 }
 
 const loadFilterTodo = (state) => async (dispatch) => {
-
     dispatch({
         type: "FILTER_TODO",
         payload: {
@@ -57,13 +55,12 @@ const createTodo = (item) => async (dispatch) => {
 
 const removeTodoItem = (item) => async (dispatch) => {
     const all = await axios.get(urlurl);
-    const index = all.data.indexOf(item)
-    const removeItem = all.data.splice(index, 1)
-    // console.log(removeItem)
+    const filtered = all.data.filter(element => element.id !== item.id)
+    await axios.delete(urlurl + `/${item.id}` )
     dispatch({
         type: "REMOVE_ITEM",
         payload: {
-            item: removeItem,
+            item: filtered,
         }
     })
     dispatch({
@@ -74,4 +71,26 @@ const removeTodoItem = (item) => async (dispatch) => {
     })
 }
 
-export {loadTodo, createTodo, loadFilterTodo, updateItem, removeTodoItem}
+const removeCompletedItems = (state) => async (dispatch) => {
+        const all = await axios.get(urlurl);
+        const filtered = all.data.filter(element => element.state !== state)
+        all.data.forEach(item => {
+            if(item.state === state){
+                axios.delete(urlurl + `/${item.id}` )
+            }
+        })
+        dispatch({
+            type: "REMOVE_COMPLETED",
+            payload: {
+                all: filtered,
+            }
+        })
+        dispatch({
+            type: "FILTER_TODO",
+            payload: {
+                state: ""
+            }
+        })
+}
+
+export {loadTodo, createTodo, loadFilterTodo, updateItem, removeTodoItem, removeCompletedItems}

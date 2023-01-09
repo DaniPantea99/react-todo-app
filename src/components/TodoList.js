@@ -11,9 +11,11 @@ function TodoList() {
 
     return (
         <ListContainer>
+
             <TodosContainer>
                 {filtered.map((item, index) => <TodoItem key={index} item={item} />)}
             </TodosContainer>
+            
             {all.length !== 0 &&
                 <TodoListFooter />
             }

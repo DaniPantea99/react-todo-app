@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import {loadFilterTodo} from '../actions/todoAction'
+import {loadFilterTodo, removeCompletedItems} from '../actions/todoAction'
 import {useSelector} from 'react-redux';
 
 
@@ -15,6 +15,9 @@ function TodoListFooter() {
         dispatch(loadFilterTodo(state))
     }
 
+    function handleRemoveCompleted(state) {
+        dispatch(removeCompletedItems(state))
+    }
   
     return (
         <FooterStyled>
@@ -26,7 +29,7 @@ function TodoListFooter() {
                 <BtnFilterStyled onClick={() => handleFilter("done")}>Completed</BtnFilterStyled>
             </FiltersStyled>
 
-            <BtnStyled>Clear Completed</BtnStyled>
+            <BtnStyled onClick={() => handleRemoveCompleted("done")}>Clear Completed</BtnStyled>
         </FooterStyled>
     )
 }

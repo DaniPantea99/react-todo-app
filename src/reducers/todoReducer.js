@@ -25,7 +25,7 @@ const todoReducer = (state = initState, action) => {
           ),
         ],
       };
-    case "UPDATE_TODO_ITEM":
+      case "UPDATE_TODO_ITEM":
         const {item} = action.payload
         const index = state.all.findIndex(f => f.id === item.id)
         const todoList = state.all.slice()
@@ -39,7 +39,12 @@ const todoReducer = (state = initState, action) => {
     case "REMOVE_ITEM":
         return {
             ...state,
-            all: [...state.all, action.payload.item],
+            all: action.payload.item,
+        }
+    case "REMOVE_COMPLETED":
+        return {
+            ...state,
+            all: action.payload.all
         }
     default:
       return { ...state };

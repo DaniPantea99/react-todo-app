@@ -20,10 +20,9 @@ function TodoItem({item}) {
         }
 
         function handleRemoveItem(e) {
-            // e.preventDefault()
             e.stopPropagation()
-            dispatch(removeTodoItem({...item, item}))
-            console.log(item)
+            dispatch(removeTodoItem(item))
+            console.log("from TodoItem:", item)
         }
             
     return (
@@ -60,7 +59,7 @@ const InputStyled = styled.input`
     /* pointer-events: none; */
     cursor: pointer;
     appearance: none;
-    width: 24px;
+    width: 22px;
     height: 22px;
     border-radius: 50%;
     border: 1px solid #40425a;
