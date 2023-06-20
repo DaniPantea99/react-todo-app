@@ -73,7 +73,7 @@ const removeTodoItem = (item) => async (dispatch) => {
 
 const removeCompletedItems = (state) => async (dispatch) => {
         const all = await axios.get(urlurl);
-        const filtered = all.data.filter(element => element.state !== state)
+        const activeItems = all.data.filter(element => element.state !== state)
         all.data.forEach(item => {
             if(item.state === state){
                 axios.delete(urlurl + `/${item.id}` )
@@ -82,15 +82,15 @@ const removeCompletedItems = (state) => async (dispatch) => {
         dispatch({
             type: "REMOVE_COMPLETED",
             payload: {
-                all: filtered,
+                activeItems,
             }
         })
-        dispatch({
-            type: "FILTER_TODO",
-            payload: {
-                state: ""
-            }
-        })
+        // dispatch({
+        //     type: "FILTER_TODO",
+        //     payload: {
+        //         state: ""
+        //     }
+        // })
 }
 
 export {loadTodo, createTodo, loadFilterTodo, updateItem, removeTodoItem, removeCompletedItems}

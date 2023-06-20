@@ -1,29 +1,19 @@
 {
   "data": [
     {
-      "text": "sa cumpar paine",
+      "text": "unu",
       "state": "active",
       "id": 1
     },
     {
-      "text": "sa merg la alergat",
+      "text": "doi",
       "state": "active",
       "id": 2
     },
     {
-      "text": "sa cumpar baterii",
+      "text": "trei",
       "state": "active",
       "id": 3
-    },
-    {
-      "text": "ceva",
-      "state": "active",
-      "id": 4
-    },
-    {
-      "text": "ceva si mai ceva",
-      "state": "active",
-      "id": 5
     }
   ]
 }

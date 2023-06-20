@@ -44,7 +44,8 @@ const todoReducer = (state = initState, action) => {
     case "REMOVE_COMPLETED":
         return {
             ...state,
-            all: action.payload.all
+            all: action.payload.activeItems, 
+            filtered: action.payload.activeItems,
         }
     default:
       return { ...state };

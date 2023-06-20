@@ -4,19 +4,28 @@ import styled from 'styled-components';
 import background from '../images/background.jpg'
 import sun from '../images/sun.svg'
 import { createTodo } from "../actions/todoAction";
+import {useSelector} from 'react-redux';
+
 
 function Header() {
    
+    const {filtered} = useSelector((state) => state.todos)
+
     const dispatch = useDispatch()
 
     function handleAddItem(e) {
         e.preventDefault();
+        const isEmpty = str => !str.trim().length;
         const inputValue = document.querySelector('input').value;
-        const item = ({"text": inputValue, "state": "active"})
-        dispatch(createTodo(item))
-        document.querySelector('input').value = "";
+        if(isEmpty(inputValue)) {
+            alert("Input is empty. Please add a short description for your todo item!")
+        }else {
+            const item = ({"text": inputValue, "state": "active"})
+                    dispatch(createTodo(item))
+                    document.querySelector('input').value = "";
+        }
     }
-
+    
     return (
         <ContainerStyled>
 
@@ -64,13 +73,16 @@ const TitleStyled = styled.h1`
 
 const InputContainerStyled = styled.div`
     display: flex;
-    justify-content: left;
+    /* justify-content: left; */
     align-items: center;
     padding: 0.25rem 1rem;
     background: #26273c;
     border-radius: 0.75rem;
     width: 450px;
     margin: 0 auto;
+    form {
+        width: 100%;
+    }
 `
 
 const CircleStyled = styled.div`

@@ -46,6 +46,7 @@ const ItemStyled = styled.div`
     background: #26273c;
     border-bottom: 1px solid #38394e;
     width: 100%;
+    min-height: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 1;
